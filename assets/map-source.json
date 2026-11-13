@@ -1,0 +1,30 @@
+{
+  "name": "Natural Earth 1:10m land and rivers + lake centerlines",
+  "homepage": "https://www.naturalearthdata.com/",
+  "repository": "https://github.com/nvkelso/natural-earth-vector",
+  "license": "Public domain",
+  "license_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+  "coordinate_system": "WGS84 longitude/latitude (EPSG:4326)",
+  "bounds": [
+    69,
+    15,
+    139,
+    57
+  ],
+  "coordinate_decimals": 5,
+  "processing": "Rectangle clipping with original coastline vertices and polygon holes; no simplification.",
+  "rebuild": "python scripts/prepare_map_geography.py",
+  "sources": [
+    {
+      "layer": "land",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson",
+      "local": "data/source/maps/ne_10m_land.geojson"
+    },
+    {
+      "layer": "river",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_rivers_lake_centerlines.geojson",
+      "local": "data/source/maps/ne_10m_rivers_lake_centerlines.geojson"
+    }
+  ],
+  "historical_note": "Physical geography is a modern reference layer; it does not represent Tang boundaries or historical river courses."
+}

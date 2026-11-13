@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN" data-type="software">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="平生功绩，以 CBDB 唐代人物记录为线索，检索籍贯、入仕途径与任职活动。">
+  <meta name="theme-color" content="#0b1322">
+  <meta name="page-type" content="software">
+  <meta name="site-kind" content="software">
+  <title>平生功绩 · 唐代人物的山河与仕途</title>
+  <link rel="preload" href="styles/LaobaoSong.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/font.css">
+  <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+  <link rel="stylesheet" href="styles/glass.css">
+  <link rel="stylesheet" href="styles/landscape.css">
+  <script defer src="lib/leaflet/leaflet.js"></script>
+  <script defer src="lib/echarts.min.js"></script>
+  <script defer src="lib/echarts-gl.min.js"></script>
+  <script defer src="assets/map-geography.js"></script>
+  <script defer src="assets/search-chars.js"></script>
+  <script defer src="data/summary.js"></script>
+  <script defer src="data/people.js"></script>
+  <script defer src="js/core.js"></script>
+  <script defer src="js/maps.js"></script>
+  <script defer src="js/charts.js"></script>
+  <script defer src="js/app.js"></script>
+  <script defer src="js/icons.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至正文</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#overview" aria-label="平生功绩首页"><span>平生功绩</span><small>人物 · 山河 · 仕途</small></a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="#overview" data-view="overview" aria-current="page">总览</a>
+        <a href="#atlas" data-view="atlas">山河分布</a>
+        <a href="#career" data-view="career">入仕任职</a>
+        <a href="#people" data-view="people">人物档案</a>
+        <a href="#sources" data-view="sources">数据说明</a>
+      </nav>
+      <button class="header-search" data-action="focus-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><span>检索人物</span><kbd>/</kbd></button>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <section id="view-overview" class="view" aria-label="项目总览">
+      <div class="hero wrap">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="red-line"></span>唐代人物数据研究 <span class="era">618—907</span></p>
+          <h1>平生<span>功绩</span></h1>
+          <p class="hero-subtitle">循一地之名，<br>读一人的行迹。</p>
+          <p class="hero-description">把散落在表与表之间的人物记录，放在一起读。先看地域与排行，再核对人数、来源和统计范围。</p>
+          <div class="hero-actions"><a class="button primary" href="#atlas">查看地域分布 <span aria-hidden="true">↗</span></a><a class="text-link" href="#people">检索人物档案 <span aria-hidden="true">→</span></a></div>
+          <div class="hero-source"><span class="source-dot"></span>基于 CBDB 中国历代人物传记资料库</div>
+        </div>
+        <div class="hero-map-panel">
+          <div class="map-topline"><span>唐 · 籍贯分布</span><span>01 / 山河</span></div>
+          <div id="hero-map" class="hero-map" aria-label="唐代人物籍贯分布预览"></div>
+          <div class="hero-map-bottom"><div><span class="tiny-label">籍贯记录覆盖</span><strong data-stat="geoPeople">—</strong><span>人</span></div><a href="#atlas" aria-label="打开交互地图">查看全图 <span aria-hidden="true">↗</span></a></div>
+          <span class="map-vertical" aria-hidden="true">山河之间，皆有来处</span>
+        </div>
+      </div>
+      <div class="overview-metrics wrap" aria-label="唐代样本概况">
+        <div class="metric-intro"><span>这份数据收录了谁</span><small>CBDB · c_dy = 6</small></div>
+        <div><strong data-stat="people">—</strong><span>唐代人物</span></div>
+        <div><strong data-stat="geoPeople">—</strong><span>有籍贯记录</span></div>
+        <div><strong data-stat="entryPeople">—</strong><span>有入仕记录</span></div>
+        <div><strong data-stat="postingPeople">—</strong><span>有任职记录</span></div>
+      </div>
+      <div class="reading-path wrap"><div><p class="eyebrow">A WAY INTO THE DATABASE</p><h2>看见分布，也看见分母</h2></div><p>初次浏览，可以先看地域与排行。核对结论时，图旁留有人数、记录数和统计范围；继续研究，则可回到人物出处、JSON 与源码。不同的阅读任务，共用同一份数据。</p></div>
+      <div class="overview-chapters wrap">
+        <div class="section-heading"><div><p class="eyebrow">READING THE RECORDS</p><h2>先看分布，再读一生</h2></div><p>地图看位置，排行作比较，档案留依据。</p></div>
+        <div class="chapter-links">
+          <a href="#atlas" class="chapter"><span class="chapter-no">壹 / GEOGRAPHY</span><h3>看地域</h3><p>切换籍贯与任职地点，<br>从地图和排行建立初步认识。</p><span class="chapter-bottom">地理分布与热点 <b aria-hidden="true">↗</b></span></a>
+          <a href="#career" class="chapter"><span class="chapter-no">贰 / CAREER</span><h3>核对计数</h3><p>把人数、记录数和分母放在图旁，<br>看清比例所覆盖的范围。</p><span class="chapter-bottom">入仕途径与任职 <b aria-hidden="true">↗</b></span></a>
+          <a href="#people" class="chapter"><span class="chapter-no">叁 / PEOPLE</span><h3>回到人物</h3><p>从一个名字打开档案，<br>核对地名、年份与原始出处。</p><span class="chapter-bottom">唐代人物档案库 <b aria-hidden="true">↗</b></span></a>
+        </div>
+      </div>
+      <section class="dufu-section" aria-labelledby="dufu-title">
+        <div class="wrap dufu-layout">
+          <div class="dufu-heading"><p class="eyebrow">A LIFE IN RECORDS / 人物个案</p><h2 id="dufu-title">杜甫<span>从几条记录，<br>读到具体的人。</span></h2><p class="dufu-life">712—770 <span>字子美 · CBDB #3915</span></p><p>同一个人物编号，连接着地点、入仕、官职和交往。这里节选有年份的记录；想确认某段经历，可以打开档案看出处。</p><a class="button inverse" href="#people?id=3915">打开杜甫档案 <span aria-hidden="true">→</span></a></div>
+          <div class="dufu-records"><div class="case-note">数据库中的杜甫 <span>SELECTED RECORDS / 记录节选</span></div><div id="dufu-timeline"></div><div class="dufu-record-footer"><span><b id="dufu-address-count">—</b> 个地点条目</span><span><b id="dufu-posting-count">—</b> 个任职条目</span><span><b data-stat="dufuRelations">—</b> 条关系记录</span></div></div>
+        </div>
+      </section>
+      <div class="scope-note wrap"><span>读图之前</span><p>这 57,474 人按 CBDB 朝代编码“唐”（c_dy = 6）筛选，包含不同身份。整体统计描述的是这份资料的收录分布；杜甫等文人只作为个案，不代表全体样本。</p><a class="text-link" href="#sources">查看统计口径 →</a></div>
+    </section>
+
+    <section id="view-atlas" class="view" hidden aria-labelledby="atlas-title">
+      <div class="wrap research-page">
+        <div class="page-heading"><div><p class="eyebrow">01 / SPATIAL ATLAS</p><h1 id="atlas-title">山河分布</h1><p>先看人物与哪些地方有关，再用排行比较数量。选中地点后，可回到具体人物核对。</p></div><button class="button secondary" data-action="export-atlas">导出当前数据 <span aria-hidden="true">↓</span></button></div>
+        <div class="atlas-toolbar"><div class="segmented" role="group" aria-label="地图统计维度"><button class="active" data-map-mode="geo" aria-pressed="true">籍贯来源</button><button data-map-mode="activity" aria-pressed="false">任职活动</button></div><p><span class="legend-dot"></span>圆点越大，关联人数越多</p></div>
+        <div class="atlas-workbench">
+          <div class="atlas-map-area"><div class="map-corner"><span id="atlas-mode-title">籍贯来源</span></div><div id="atlas-map" class="atlas-map"></div><div class="map-controls"><button data-action="map-zoom-in" aria-label="放大地图">＋</button><button data-action="map-zoom-out" aria-label="缩小地图">−</button><button data-action="map-reset" aria-label="复位地图">⌖</button></div><div class="map-selection" id="map-selection"></div></div>
+          <aside class="atlas-ranking" aria-labelledby="ranking-title"><div class="ranking-heading"><h2 id="ranking-title">籍贯地排行</h2><span>TOP 12</span></div><p id="atlas-coverage"></p><div id="atlas-ranks" class="rank-list"></div></aside>
+        </div>
+        <div class="figure-caption"><p>拖拽平移 · 滚轮缩放 · 搜索地名可定位</p><span id="map-basemap-status" role="status" aria-live="polite">正在加载底图</span></div>
+        <details class="figure-method"><summary>统计口径与地理来源</summary><div class="figure-method-body"><p><strong>怎么计数</strong>同一地点内按人物编号去重；一个人可能关联多个地点，各地点人数不能直接相加。</p><p><strong>地点与底图</strong>人物坐标来自 CBDB；纸本层为 Natural Earth 1:10m，在线层可选 Esri 地形或 OSM 街道。现代底图仅供定位，不表示唐代疆界或历史河道。</p><a href="#sources">查看完整数据方法</a></div></details>
+        <div class="chart-section"><div class="section-heading"><div><p class="eyebrow">REGIONAL COMPARISON</p><h2>地点之间的比较</h2></div><div class="segmented" role="group" aria-label="地点排行图表形式"><button data-chart-mode="2d" class="active" aria-pressed="true">平面图</button><button data-chart-mode="3d" aria-pressed="false">三维图</button></div></div><div id="atlas-chart" class="chart tall-chart" aria-label="地点人物数排行图"></div><p id="chart-fallback" class="chart-status" role="status" hidden></p><div class="figure-caption"><p><strong>单位：人</strong> · 显示关联人数前 12 的地点</p><p id="ranking-chart-help">点击柱形定位地点</p></div></div>
+      </div>
+    </section>
+
+    <section id="view-career" class="view" hidden aria-labelledby="career-title">
+      <div class="wrap research-page">
+        <div class="page-heading"><div><p class="eyebrow">02 / PATHS TO OFFICE</p><h1 id="career-title">入仕与任职</h1><p>入仕方式和任职经历分表记录。先分清人数与记录数，再比较途径和比例。</p></div><button class="button secondary" data-action="export-entry">导出途径数据 <span aria-hidden="true">↓</span></button></div>
+        <div class="career-metrics"><div><span>有入仕记录的人物</span><strong data-stat="entryPeople">—</strong><small id="entry-coverage"></small></div><div><span>原始入仕记录</span><strong data-stat="entryRecords">—</strong><small>同一人物可有多条记录</small></div><div><span>有官职记录的人物</span><strong data-stat="postingPeople">—</strong><small>来自任职官职表</small></div><div><span>有任职地记录的人物</span><strong data-stat="activityPeople">—</strong><small>来自任职地点表</small></div></div>
+        <div class="career-charts"><article class="chart-paper"><div class="panel-heading"><div><p class="eyebrow">ENTRY RECORDS</p><h2>入仕记录的构成</h2></div><span class="small-tag">按原始记录计</span></div><div id="entry-chart" class="chart" aria-label="入仕途径原始记录占比"></div><p class="chart-hint">分母为 2,072 条原始入仕记录。前七类单列，其余归为“其他”；点击具体途径可核对人物。</p></article><article class="chart-paper"><div class="panel-heading"><div><p class="eyebrow">PEOPLE BY PATH</p><h2>各途径关联人数</h2></div><span class="small-tag">类内去重</span></div><div id="entry-rank-chart" class="chart" aria-label="入仕途径人数排行"></div><p class="chart-hint">有入仕记录者共 1,824 人。每类内部按人物编号去重，同一人仍可能属于多个途径，不能把各类人数直接相加。</p></article></div>
+        <div class="reading-notes"><div><span class="note-index">01</span><h3>进士记录的覆盖范围</h3><p id="jinshi-note"></p></div><div><span class="note-index">02</span><h3>没有记录时，保留空缺</h3><p>入仕资料只覆盖部分人物。传世材料和整理程度都会影响收录，不能用缺失值判断某人未曾入仕，也不能把样本比例直接外推。</p></div><div><span class="note-index">03</span><h3>官职与任职地点分开核对</h3><p>官职表记录任职经历，地点表记录任职与何处相连。没有地点的官职记录仍保留；查看人物档案时可以逐条展开。</p></div></div>
+        <div class="section-heading path-table-heading"><div><p class="eyebrow">THE COMPLETE INDEX</p><h2>入仕途径索引</h2></div><label class="inline-search"><span>筛选途径</span><input id="entry-filter" type="search" placeholder="名称或编码"></label></div><div class="table-scroll"><table class="data-table"><thead><tr><th>途径 / 编码</th><th>关联人物</th><th>原始记录</th><th><span class="sr-only">操作</span></th></tr></thead><tbody id="entry-table"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="view-people" class="view" hidden aria-labelledby="people-title">
+      <div class="wrap research-page">
+        <div class="page-heading"><div><p class="eyebrow">03 / BIOGRAPHICAL ARCHIVE</p><h1 id="people-title">人物档案</h1><p>在 <span data-stat="people">—</span> 份唐代人物记录中检索姓名、地点或入仕方式，再查看原始编码与出处。</p></div><button class="button secondary" data-action="export-people">导出检索结果 <span aria-hidden="true">↓</span></button></div>
+        <form id="people-search-form" class="people-search-form" role="search"><label class="search-mode-label"><span class="sr-only">检索类型</span><select id="search-mode"><option value="name">姓名 / 编号</option><option value="address">相关地点</option><option value="entry">入仕途径</option><option value="office">任职官职</option></select></label><label class="people-input-label"><span class="sr-only">检索关键词</span><input id="people-query" type="search" placeholder="输入姓名、拼音或 CBDB 编号，如 杜甫" autocomplete="off"></label><button class="button primary" type="submit">检索档案 <span aria-hidden="true">→</span></button></form>
+        <div class="people-filters"><div class="quick-people"><span>从他们读起</span><button data-person="3915">杜甫</button><button data-person="32540">李白</button><button data-person="32227">白居易</button><button data-person="32174">王维</button></div><label class="period-label">出生年代<select id="birth-period"><option value="">全部 / 含未详</option><option value="600-699">600—699</option><option value="700-749">700—749</option><option value="750-799">750—799</option><option value="800-899">800—899</option></select></label></div>
+        <div id="active-filters" class="active-filters" hidden></div>
+        <div class="people-workbench"><aside class="people-list-panel"><div class="result-heading"><span id="result-count" role="status" aria-live="polite"></span><button class="text-button" data-action="clear-search">重置</button></div><div id="people-results" class="people-results"></div><div class="pagination"><button data-action="prev-page" aria-label="上一页">←</button><span id="page-label"></span><button data-action="next-page" aria-label="下一页">→</button></div></aside><article class="person-profile" id="person-profile" aria-label="人物档案详情"></article></div>
+      </div>
+    </section>
+
+    <section id="view-sources" class="view" hidden aria-labelledby="sources-title">
+      <div class="wrap research-page sources-page">
+        <div class="page-heading"><div><p class="eyebrow">04 / DATA & METHOD</p><h1 id="sources-title">数据与阅读方法</h1><p>把查询条件、计数单位和出处留在结果旁边。</p></div><span class="snapshot-stamp">本地快照 <b>2026.05.23</b></span></div>
+        <div class="method-intro"><span class="big-initial">数</span><div><h2>从表与表之间，找到阅读的线索</h2><p>读人物数据库，难处常在表与表之间：地名、身份和任职各有记录，却不容易看出分布；图表只给比例，又容易藏起分母。我把查询结果整理到同一入口，让初步观察和回查依据留在一起。</p><a class="text-link" href="https://projects.iq.harvard.edu/cbdb" target="_blank" rel="noreferrer">访问 CBDB 项目网站 ↗</a></div></div>
+        <div class="reading-path"><div><p class="eyebrow">WHY THIS PAGE</p><h2>把观察与核验放在一起</h2></div><div class="design-statement"><p>地图回答位置，排行方便比较，统计表补足分母与计数单位。我按阅读任务组织页面：先建立全局认识，再逐项核对数值与范围。二维图照顾准确比较，三维图保留换个角度观察的趣味。</p><p>这些依据放在图旁，是为了让读者少依赖展示者的解释，也少走几步回查的路。概览、核验和进一步分析因此能够沿着同一份数据展开。</p></div></div>
+        <div class="method-grid"><article><span>01 / 样本范围</span><h3>57,474 人，按朝代编码筛选</h3><p>整体统计条件为 BIOG_MAIN.c_dy = 6，未以职业字段再次筛选诗人。杜甫、李白等作为个案呈现，不代表全体样本的身份。</p></article><article><span>02 / 去重规则</span><h3>合并地点，保留原编码</h3><p>同名且经纬度四舍五入到两位小数一致的地点，合并历史地址编码；缺失坐标时不跨编码合并。人数使用人物编号并集。同名异人保持独立。</p></article><article><span>03 / 记录解释</span><h3>地名类别与缺失年份</h3><p>地点类别采用数据库代码表的原始含义；前住地不代替任职地。零值或未载年份显示“年未详”；籍贯记录不等于出生地。</p></article><article><span>04 / 统计边界</span><h3>比例对应哪一个分母</h3><p>入仕方式的占比按原始记录计算；人物排行类内去重。资料缺失、时代编码与传世偏差影响覆盖率，不能直接解释为历史总体比例。</p></article></div>
+        <div class="section-heading schema-heading"><div><p class="eyebrow">DATABASE STRUCTURE</p><h2>五张核心记录表</h2></div><p>选择一张表，查看字段与关联方式。</p></div><div id="schema-tabs" class="schema-tabs" role="tablist" aria-label="核心数据库表"></div><div id="schema-panel" class="schema-panel" role="tabpanel"></div>
+        <div class="reproducibility"><div><p class="eyebrow">REPRODUCIBLE RESEARCH</p><h2>继续处理这些记录</h2><p>需要进一步分析时，可以下载 JSON，或到 GitHub 查看数据处理与界面源码。人物编号、历史地址编号、原始条数和出处一并保留，方便沿着结果回查。</p></div><div class="file-links"><a href="data/summary.json" download>下载统计结果 <span>JSON ↓</span></a><a href="docs/data-method.md">阅读数据方法 <span>MD ↗</span></a><a href="https://github.com/Unirevora/PingshengGongji" target="_blank" rel="noreferrer">查看项目源码 <span>GitHub ↗</span></a></div></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><a class="footer-brand" href="#overview">平生功绩<span>分布可看，依据可查。</span></a><div class="footer-credit"><p class="author-name">澹台枕流 <span>Unirevora</span></p><p>数据：CBDB · 本地快照 2026.05.23</p></div><a class="text-link" href="#sources">数据与方法 ↗</a></div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="noscript-note">请启用 JavaScript 以查看本地数据与交互图表。数据文件保存在项目的 data 目录中。</p></noscript>
+</body>
+</html>

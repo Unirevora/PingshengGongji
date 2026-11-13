@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'LaobaoSong';
+  src: url('./LaobaoSong.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  --serif: 'LaobaoSong', 'SimSun', serif;
+  --sans: 'LaobaoSong', 'SimSun', serif;
+}
+
+html,
+body,
+body * {
+  font-family: var(--serif) !important;
+}
+
+code,
+code *,
+kbd,
+kbd * {
+  font-family: Consolas, 'Courier New', monospace !important;
+}

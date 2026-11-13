@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+data/source/
+docs/reports/
+docs/verification/
+tests/
+.taste-skill/
+styles/LaobaoSong.source.ttf
+*.log
+.env
+.env.*
+!.env.example
